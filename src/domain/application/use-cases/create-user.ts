@@ -23,6 +23,12 @@ export class CreateUser {
     image,
     phone,
   }: CreateUserRequest): Promise<CreateUserResponse> {
+    const cpfAlreadyInUse = await this.userRepository.findByCpf(cpf)
+
+    if (cpfAlreadyInUse) {
+      throw new Error('CPF already in use')
+    }
+
     const user = User.create({
       cpf,
       email,
@@ -32,7 +38,7 @@ export class CreateUser {
       phone,
     })
 
-    this.userRepository.create(user)
+    await this.userRepository.create(user)
 
     return {}
   }

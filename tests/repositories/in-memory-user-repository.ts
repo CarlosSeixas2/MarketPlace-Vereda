@@ -7,4 +7,8 @@ export class InMemoryUserRepository implements UserRepository {
   async create(user: User) {
     this.items.push(user)
   }
+
+  async findByCpf(cpf: string) {
+    return this.items.find((user) => user.cpf === cpf) ?? null
+  }
 }

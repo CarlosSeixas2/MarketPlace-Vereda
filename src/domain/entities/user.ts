@@ -13,4 +13,8 @@ export class User extends Entity<UserProps> {
   ) {
     return new User({ ...props, createdAt: props.createdAt ?? new Date() }, id)
   }
+
+  get cpf() {
+    return this.props.cpf
+  }
 }
