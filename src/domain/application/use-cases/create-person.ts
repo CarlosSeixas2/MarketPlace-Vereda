@@ -1,7 +1,7 @@
 import { Person } from '@/domain/entities/person'
-import { UserRepository } from '../repositories/user-repository'
+import { PersonRepository } from '../repositories/person-repository'
 
-export interface CreateUserRequest {
+export interface CreatePersonRequest {
   name: string
   cpf: string
   email: string
@@ -10,10 +10,10 @@ export interface CreateUserRequest {
   phone?: string
 }
 
-interface CreateUserResponse {}
+interface CreatePersonResponse {}
 
-export class CreateUser {
-  constructor(private readonly userRepository: UserRepository) {}
+export class CreatePerson {
+  constructor(private readonly personRepository: PersonRepository) {}
 
   async execute({
     cpf,
@@ -22,8 +22,8 @@ export class CreateUser {
     password,
     image,
     phone,
-  }: CreateUserRequest): Promise<CreateUserResponse> {
-    const cpfAlreadyInUse = await this.userRepository.findByCpf(cpf)
+  }: CreatePersonRequest): Promise<CreatePersonResponse> {
+    const cpfAlreadyInUse = await this.personRepository.findByCpf(cpf)
 
     if (cpfAlreadyInUse) {
       throw new Error('CPF already in use')
@@ -38,7 +38,7 @@ export class CreateUser {
       phone,
     })
 
-    await this.userRepository.create(user)
+    await this.personRepository.create(user)
 
     return {}
   }
