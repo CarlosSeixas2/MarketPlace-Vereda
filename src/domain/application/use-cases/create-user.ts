@@ -1,4 +1,4 @@
-import { User } from '../../entities/user'
+import { Person } from '@/domain/entities/person'
 import { UserRepository } from '../repositories/user-repository'
 
 export interface CreateUserRequest {
@@ -29,7 +29,7 @@ export class CreateUser {
       throw new Error('CPF already in use')
     }
 
-    const user = User.create({
+    const user = Person.create({
       cpf,
       email,
       name,

@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { User } from '../../../entities/user'
+import { Person } from '../../../entities/person'
 import { CreateUser } from '../create-user'
 import { InMemoryUserRepository } from '../../../../../tests/repositories/in-memory-user-repository'
 
 describe('CreateUser', () => {
   it('should create a user', async () => {
-    const user = User.create({
+    const user = Person.create({
       cpf: '123456789',
       email: 'test@gmail.com',
       name: 'Test',
