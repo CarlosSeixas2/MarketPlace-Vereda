@@ -2,26 +2,26 @@ import { UniqueEntityID } from '../../core/entities/unique-entity-id'
 import { Optional } from '../../core/types/optional'
 import { UserEntity, UserEntityProps } from './interfaces/user-entity'
 
-enum TypeCompany {
+export enum TypeCompany {
   'MEI',
   'LTDA',
   'S/A',
 }
 
-interface EnterpriseProps extends UserEntityProps {
+export interface EnterpriseProps extends UserEntityProps {
   name: string
   cnpj: string
-  corporate_reason: string
-  fantasy_name: string
-  type_company: TypeCompany
+  corporateReason: string
+  fantasyName: string
+  typeCompany: TypeCompany
 }
 
-export class Entrepise extends UserEntity<EnterpriseProps> {
+export class Enterprise extends UserEntity<EnterpriseProps> {
   static create(
     props: Optional<EnterpriseProps, 'phone' | 'image' | 'createdAt'>,
     id?: UniqueEntityID,
   ) {
-    return new Entrepise(
+    return new Enterprise(
       { ...props, createdAt: props.createdAt ?? new Date() },
       id,
     )
@@ -31,7 +31,39 @@ export class Entrepise extends UserEntity<EnterpriseProps> {
     return this.props.name
   }
 
+  set name(name: string) {
+    this.props.name = name
+  }
+
   get cnpj() {
     return this.props.cnpj
+  }
+
+  set cnpj(cnpj: string) {
+    this.props.cnpj = cnpj
+  }
+
+  get corporateReason() {
+    return this.props.corporateReason
+  }
+
+  set corporateReason(corporateReason: string) {
+    this.props.corporateReason = corporateReason
+  }
+
+  get fantasyName() {
+    return this.props.fantasyName
+  }
+
+  set fantasyName(fantasyName: string) {
+    this.props.fantasyName = fantasyName
+  }
+
+  get typeCompany() {
+    return this.props.typeCompany
+  }
+
+  set typeCompany(typeCompany: TypeCompany) {
+    this.props.typeCompany = typeCompany
   }
 }

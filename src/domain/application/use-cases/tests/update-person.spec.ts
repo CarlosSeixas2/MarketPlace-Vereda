@@ -2,6 +2,7 @@ import { describe, it } from 'vitest'
 import { InMemoryPersonRepository } from '../../../../../tests/repositories/in-memory-person-repository'
 import { makePerson } from '../../../../../tests/factories/make-person'
 import { UpdatePerson } from '../update-person'
+import { faker } from '@faker-js/faker'
 
 describe('UpdatePerson', () => {
   it('should update a person', async () => {
@@ -12,15 +13,17 @@ describe('UpdatePerson', () => {
 
     await inMemoryPersonRepository.create(person)
 
-    await sut.execute({
+    const payloadDelete = {
       userId: person.id.toString(),
-      cpf: 'new-cpf',
-      name: 'new-name',
-      email: 'new-email',
-      password: 'new-password',
-    })
+      cpf: faker.string.numeric(11),
+      email: faker.internet.email(),
+      name: faker.person.fullName(),
+      password: faker.internet.password(),
+    }
+
+    await sut.execute(payloadDelete)
 
     expect(inMemoryPersonRepository.items).toHaveLength(1)
-    expect(inMemoryPersonRepository.items[0].cpf).toBe('new-cpf')
+    expect(inMemoryPersonRepository.items[0].cpf).toBe(payloadDelete.cpf)
   })
 })

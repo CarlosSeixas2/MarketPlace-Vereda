@@ -13,7 +13,10 @@ export class Person extends UserEntity<PersonProps> {
     id?: UniqueEntityID,
   ) {
     return new Person(
-      { ...props, createdAt: props.createdAt ?? new Date() },
+      {
+        ...props,
+        createdAt: props.createdAt ?? new Date(),
+      },
       id ?? new UniqueEntityID(),
     )
   }
