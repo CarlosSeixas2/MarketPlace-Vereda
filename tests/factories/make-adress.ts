@@ -16,6 +16,7 @@ export function makeAdress(
       state: faker.location.state(),
       street: faker.location.street(),
       zipcode: faker.location.zipCode(),
+      userId: new UniqueEntityID(),
       ...override,
     },
     id,

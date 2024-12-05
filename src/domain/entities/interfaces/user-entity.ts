@@ -1,4 +1,3 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Entity } from '../../../core/entities/entity'
 
 export interface UserEntityProps {
@@ -8,7 +7,6 @@ export interface UserEntityProps {
   phone?: string
   createdAt: Date
   updatedAt?: Date
-  adressId?: UniqueEntityID
 }
 
 export class UserEntity<Props extends UserEntityProps> extends Entity<Props> {
@@ -54,16 +52,6 @@ export class UserEntity<Props extends UserEntityProps> extends Entity<Props> {
 
   get updatedAt() {
     return this.props.updatedAt
-  }
-
-  get adressId() {
-    return this.props.adressId
-  }
-
-  set adressId(adressId: UniqueEntityID | undefined) {
-    if (adressId) {
-      this.props.adressId = adressId
-    }
   }
 
   protected updateItem() {

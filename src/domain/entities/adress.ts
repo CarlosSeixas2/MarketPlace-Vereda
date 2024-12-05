@@ -10,12 +10,13 @@ export interface AdressProps {
   country: string
   zipcode: string
   complement?: string
+  userId: UniqueEntityID
   createdAt: Date
 }
 
 export class Adress extends Entity<AdressProps> {
   static create(
-    props: Optional<AdressProps, 'createdAt'>,
+    props: Optional<AdressProps, 'createdAt' | 'complement'>,
     id?: UniqueEntityID,
   ) {
     return new Adress(
@@ -52,6 +53,10 @@ export class Adress extends Entity<AdressProps> {
     return this.props.complement
   }
 
+  get userId() {
+    return this.props.userId
+  }
+
   set street(value: string) {
     this.props.street = value
   }
@@ -78,5 +83,9 @@ export class Adress extends Entity<AdressProps> {
 
   set complement(value: string | undefined) {
     this.props.complement = value
+  }
+
+  set userId(id: UniqueEntityID) {
+    this.props.userId = id
   }
 }

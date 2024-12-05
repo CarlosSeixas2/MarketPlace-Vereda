@@ -1,22 +1,41 @@
-import { PersonRepository } from '../repositories/person-repository'
+import { Adress } from '@/domain/entities/adress'
+import { AdressRepository } from '../repositories/adress-repository'
 
-export interface DeletePersonRequest {
-  id: string
+export interface CreateAdressRequest {
+  street: string
+  number: string
+  city: string
+  state: string
+  country: string
+  zipcode: string
+  complement?: string
 }
 
-export interface DeletePersonResponse {}
+export interface CreateAdressResponse {}
 
-export class DeletePerson {
-  constructor(private readonly personRepository: PersonRepository) {}
+export class CreateAdress {
+  constructor(private readonly adressRepository: AdressRepository) {}
 
-  async execute({ id }: DeletePersonRequest): Promise<DeletePersonResponse> {
-    const person = await this.personRepository.findById(id)
+  async execute({
+    street,
+    number,
+    city,
+    state,
+    country,
+    zipcode,
+    complement,
+  }: CreateAdressRequest): Promise<CreateAdressResponse> {
+    const adress = Adress.create({
+      street,
+      number,
+      city,
+      state,
+      country,
+      zipcode,
+      complement,
+    })
 
-    if (!person) {
-      throw new Error('Person not found')
-    }
-
-    await this.personRepository.delete(person)
+    this.adressRepository.create(adress)
 
     return {}
   }

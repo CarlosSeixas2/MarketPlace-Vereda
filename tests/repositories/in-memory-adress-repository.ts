@@ -11,4 +11,16 @@ export class InMemoryAdressRepository implements AdressRepository {
   async findById(id: string) {
     return this.items.find((item) => item.id.toString() === id) ?? null
   }
+
+  async delete(adress: Adress) {
+    const index = this.items.findIndex((item) => item.id === adress.id)
+
+    this.items.splice(index, 1)
+  }
+
+  async save(adress: Adress): Promise<void> {
+    const itemIndex = this.items.findIndex((item) => item.id === adress.id)
+
+    this.items[itemIndex] = adress
+  }
 }

@@ -10,7 +10,6 @@ import {
 export function makeEnterprise(
   override: Partial<EnterpriseProps> = {},
   id?: UniqueEntityID,
-  adressId?: UniqueEntityID,
 ) {
   const enterprise = Enterprise.create(
     {
@@ -21,7 +20,6 @@ export function makeEnterprise(
       fantasyName: faker.lorem.paragraph(),
       password: faker.internet.password(),
       typeCompany: TypeCompany.MEI,
-      adressId: adressId ?? new UniqueEntityID(),
       ...override,
     },
     id,
