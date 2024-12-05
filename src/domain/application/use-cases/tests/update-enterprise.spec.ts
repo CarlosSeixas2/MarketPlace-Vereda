@@ -14,7 +14,7 @@ describe('UpdateEnterprise', () => {
 
     await inMemoryEnterpriseRepository.create(enterprise)
 
-    const payloadDelete = {
+    const payloadUpdate = {
       enterpriseId: enterprise.id.toString(),
       name: faker.person.fullName(),
       cnpj: faker.string.numeric(11),
@@ -25,9 +25,9 @@ describe('UpdateEnterprise', () => {
       password: faker.internet.password(),
     }
 
-    await sut.execute(payloadDelete)
+    await sut.execute(payloadUpdate)
 
     expect(inMemoryEnterpriseRepository.items).toHaveLength(1)
-    expect(inMemoryEnterpriseRepository.items[0].cnpj).toBe(payloadDelete.cnpj)
+    expect(inMemoryEnterpriseRepository.items[0].cnpj).toBe(payloadUpdate.cnpj)
   })
 })

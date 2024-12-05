@@ -10,8 +10,6 @@ describe('Create Adress', () => {
     const adress = makeAdress()
     sut.execute(adress)
 
-    console.log(adress)
-
     expect(inMemoryAdressRepository.items).toHaveLength(1)
   })
 })

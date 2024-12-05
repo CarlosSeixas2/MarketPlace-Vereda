@@ -13,7 +13,7 @@ describe('UpdatePerson', () => {
 
     await inMemoryPersonRepository.create(person)
 
-    const payloadDelete = {
+    const payloadUpdate = {
       userId: person.id.toString(),
       cpf: faker.string.numeric(11),
       email: faker.internet.email(),
@@ -21,9 +21,9 @@ describe('UpdatePerson', () => {
       password: faker.internet.password(),
     }
 
-    await sut.execute(payloadDelete)
+    await sut.execute(payloadUpdate)
 
     expect(inMemoryPersonRepository.items).toHaveLength(1)
-    expect(inMemoryPersonRepository.items[0].cpf).toBe(payloadDelete.cpf)
+    expect(inMemoryPersonRepository.items[0].cpf).toBe(payloadUpdate.cpf)
   })
 })
